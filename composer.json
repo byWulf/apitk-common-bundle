@@ -1,6 +1,7 @@
 {
   "name": "shopping/apitk-common-bundle",
   "version": "0.0.1",
+  "license": "MIT",
   "type": "symfony-bundle",
   "description": "",
   "authors": [
@@ -15,12 +16,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "Shopping\\ApiCommonBundle\\": "src/"
+      "Shopping\\ApiTKCommonBundle\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Shopping\\ApiCommonBundle\\Tests\\": "tests/"
+      "Shopping\\ApiTKCommonBundle\\Tests\\": "tests/"
     }
   },
   "config": {

@@ -1,7 +1,8 @@
 <?php
-declare(strict_types = 1);
 
-namespace Shopping\ApiCommonBundle\Util;
+declare(strict_types=1);
+
+namespace Shopping\ApiTKCommonBundle\Util;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
