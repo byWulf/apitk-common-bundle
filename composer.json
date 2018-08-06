@@ -15,14 +15,10 @@
     }
   ],
   "autoload": {
-    "psr-4": {
-      "Shopping\\ApiTKCommonBundle\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Shopping\\ApiTKCommonBundle\\Tests\\": "tests/"
-    }
+    "psr-4": { "Shopping\\ApiTKCommonBundle\\": "" },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
   },
   "config": {
     "preferred-install": {

@@ -28,7 +28,7 @@ final class ControllerReflector
     {
         $callable = $this->getClassAndMethod($controller);
         if (null === $callable) {
-            return;
+            return null;
         }
 
         list($class, $method) = $callable;
@@ -45,7 +45,7 @@ final class ControllerReflector
     {
         $callable = $this->getClassAndMethod($controller);
         if (null === $callable) {
-            return;
+            return null;
         }
 
         list($class, $method) = $callable;
@@ -58,12 +58,27 @@ final class ControllerReflector
         }
     }
 
+    /**
+     * @param string $controller
+     *
+     * @return array|null
+     */
     private function getClassAndMethod(string $controller)
     {
-        if (isset($this->controllers[$controller])) {
-            return $this->controllers[$controller];
+        if (!isset($this->controllers[$controller])) {
+            $this->controllers[$controller] = $this->detectClassAndMethod($controller);
         }
 
+        return $this->controllers[$controller];
+    }
+
+    /**
+     * @param string $controller
+     *
+     * @return array|null [$class, $method]
+     */
+    private function detectClassAndMethod(string $controller): ?array
+    {
         if (preg_match('#(.+)::([\w]+)#', $controller, $matches)) {
             $class = $matches[1];
             $method = $matches[2];
@@ -86,11 +101,9 @@ final class ControllerReflector
         }
 
         if (!isset($class) || !isset($method)) {
-            $this->controllers[$controller] = null;
-
-            return;
+            return null;
         }
 
-        return $this->controllers[$controller] = [$class, $method];
+        return [$class, $method];
     }
 }
