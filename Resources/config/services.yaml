@@ -1,2 +1,3 @@
 services:
-  Shopping\ApiTKCommonBundle\Util\ControllerReflector: ~
+  Shopping\ApiTKCommonBundle\Util\ControllerReflector:
+    autowire: true

@@ -11,11 +11,7 @@
                 "options": []
             },
             {
-                "action": "php ./vendor/phpstan/phpstan/bin/phpstan analyse -l 1 src",
-                "options": []
-            },
-            {
-                "action": "php ./vendor/phpmd/phpmd/src/bin/phpmd src text ruleset.xml",
+                "action": "php ./vendor/phpmd/phpmd/src/bin/phpmd ./ text ruleset.xml",
                 "options": []
             }
         ]

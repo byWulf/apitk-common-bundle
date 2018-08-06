@@ -44,10 +44,8 @@ return PhpCsFixer\Config::create()
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
-            ->exclude('Migrations')
             ->in([
-                __DIR__ . DIRECTORY_SEPARATOR . 'src',
-                __DIR__ . DIRECTORY_SEPARATOR . 'tests',
+                __DIR__,
             ])
             ->name('*.php')
     )

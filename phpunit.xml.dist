@@ -25,7 +25,8 @@
 
     <filter>
         <whitelist>
-            <directory>src</directory>
+            <directory>DependencyInjection</directory>
+            <directory>Util</directory>
         </whitelist>
     </filter>
 </phpunit>
