@@ -11,7 +11,11 @@
                 "options": []
             },
             {
-                "action": "php ./vendor/phpmd/phpmd/src/bin/phpmd ./ text ruleset.xml",
+                "action": "php ./vendor/phpstan/phpstan/bin/phpstan analyse -l 1 -c phpstan.neon .",
+                "options": []
+            },
+            {
+                "action": "php ./vendor/phpmd/phpmd/src/bin/phpmd ./ text ruleset.xml --exclude vendor",
                 "options": []
             }
         ]

@@ -38,5 +38,10 @@
     "phpunit/phpunit": "^7.0",
     "sebastianfeldmann/captainhook": "^2.1",
     "symfony/phpunit-bridge": "^4.0"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "\\SebastianFeldmann\\CaptainHook\\Composer\\Cmd::install"
+    ]
   }
 }
