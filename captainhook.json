@@ -1,0 +1,32 @@
+{
+    "commit-msg": {
+        "enabled": true,
+        "actions": []
+    },
+    "pre-commit": {
+        "enabled": true,
+        "actions": [
+            {
+                "action": "php ./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --verbose --dry-run",
+                "options": []
+            },
+            {
+                "action": "php ./vendor/phpstan/phpstan/bin/phpstan analyse -l 1 src",
+                "options": []
+            },
+            {
+                "action": "php ./vendor/phpmd/phpmd/src/bin/phpmd src text ruleset.xml",
+                "options": []
+            }
+        ]
+    },
+    "pre-push": {
+        "enabled": true,
+        "actions": [
+            {
+                "action": "php ./vendor/phpunit/phpunit/phpunit --verbose",
+                "options": []
+            }
+        ]
+    }
+}
