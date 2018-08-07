@@ -1,6 +1,6 @@
 <?php
 
-namespace Shopping\ApiTKCommonBundle\Tests;
+namespace Shopping\ApiTKCommonBundle\Tests\Util;
 
 use PHPUnit\Framework\TestCase;
 use Shopping\ApiTKCommonBundle\Util\ControllerReflector;
@@ -47,7 +47,7 @@ class ControllerReflectorTest extends TestCase
             ->willReturn($controller);
 
         $actual = $this->reflector
-            ->getReflectionClassAndMethod('Shopping\ApiTKCommonBundle\Tests\ControllerExample:someAction');
+            ->getReflectionClassAndMethod('Shopping\ApiTKCommonBundle\Tests\Util\ControllerExample:someAction');
 
         $this->assertInternalType('array', $actual);
         $this->assertCount(2, $actual);
@@ -68,7 +68,7 @@ class ControllerReflectorTest extends TestCase
         $this->containerInterface->get(MagicControllerExample::class)->shouldNotBeCalled();
 
         $actual = $this->reflector
-            ->getReflectionClassAndMethod('Shopping\ApiTKCommonBundle\Tests\MagicControllerExample');
+            ->getReflectionClassAndMethod('Shopping\ApiTKCommonBundle\Tests\Util\MagicControllerExample');
 
         $this->assertInternalType('array', $actual);
         $this->assertCount(2, $actual);
@@ -89,7 +89,7 @@ class ControllerReflectorTest extends TestCase
         $this->containerInterface->get(ControllerExample::class)->shouldNotBeCalled();
 
         $actual = $this->reflector
-            ->getReflectionClassAndMethod('Shopping\ApiTKCommonBundle\Tests\ControllerExample::anotherAction');
+            ->getReflectionClassAndMethod('Shopping\ApiTKCommonBundle\Tests\Util\ControllerExample::anotherAction');
 
         $this->assertInternalType('array', $actual);
         $this->assertCount(2, $actual);
