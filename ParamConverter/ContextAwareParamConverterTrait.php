@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Shopping\ApiTKCommonBundle\ParamConverter;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -22,6 +23,11 @@ trait ContextAwareParamConverterTrait
     protected $configuration;
 
     /**
+     * @var ParameterBag
+     */
+    protected $options;
+
+    /**
      * @var Request
      */
     protected $request;
@@ -34,8 +40,9 @@ trait ContextAwareParamConverterTrait
      */
     protected function initialize(Request $request, ParamConverter $configuration): void
     {
-        $this->setRequest($request);
-        $this->setConfiguration($configuration);
+        $this->request = $request;
+        $this->configuration = $configuration;
+        $this->options = new ParameterBag($configuration->getOptions());
     }
 
     /**
@@ -47,18 +54,6 @@ trait ContextAwareParamConverterTrait
     }
 
     /**
-     * @param ParamConverter $configuration
-     *
-     * @return ContextAwareParamConverterTrait
-     */
-    protected function setConfiguration(ParamConverter $configuration): ContextAwareParamConverterTrait
-    {
-        $this->configuration = $configuration;
-
-        return $this;
-    }
-
-    /**
      * @return Request
      */
     protected function getRequest(): Request
@@ -67,14 +62,21 @@ trait ContextAwareParamConverterTrait
     }
 
     /**
-     * @param Request $request
-     *
-     * @return ContextAwareParamConverterTrait
+     * @return ParameterBag
      */
-    protected function setRequest(Request $request): ContextAwareParamConverterTrait
+    public function getOptions(): ParameterBag
     {
-        $this->request = $request;
+        return $this->options;
+    }
 
-        return $this;
+    /**
+     * @param string $optionName
+     * @param null   $defaultValue
+     *
+     * @return mixed|null
+     */
+    protected function getOption(string $optionName, $defaultValue = null)
+    {
+        return $this->getOptions()->get($optionName) ?? $defaultValue;
     }
 }
