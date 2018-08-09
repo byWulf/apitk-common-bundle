@@ -6,7 +6,6 @@ namespace Shopping\ApiTKCommonBundle\ParamConverter;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * Trait EntityAwareParamConverterTrait.
@@ -17,15 +16,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
  */
 trait EntityAwareParamConverterTrait
 {
+    use ContextAwareParamConverterTrait;
+
     /**
      * @var ManagerRegistry
      */
     protected $registry;
-
-    /**
-     * @var ParamConverter
-     */
-    protected $configuration;
 
     /**
      * @param ManagerRegistry $registry
@@ -40,7 +36,7 @@ trait EntityAwareParamConverterTrait
      */
     protected function getEntity(): ?string
     {
-        return $this->configuration->getOptions()['entity'] ?? null;
+        return $this->getOption('entity', null);
     }
 
     /**
@@ -48,7 +44,7 @@ trait EntityAwareParamConverterTrait
      */
     protected function getManager(): ?ObjectManager
     {
-        $name = $this->configuration->getOptions()['entityManager'] ?? null;
+        $name = $this->getOption('entityManager', null);
 
         if (null === $name) {
             return $this->registry->getManagerForClass($this->getEntity());
@@ -64,7 +60,7 @@ trait EntityAwareParamConverterTrait
      */
     protected function getRepositoryMethodName(string $defaultName = null): ?string
     {
-        return $this->configuration->getOptions()['methodName'] ?? $defaultName;
+        return $this->getOption('methodName', $defaultName);
     }
 
     /**

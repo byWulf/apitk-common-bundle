@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Shopping\ApiTKCommonBundle\ParamConverter;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -16,10 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 trait RequestParamAwareParamConverterTrait
 {
-    /**
-     * @var ParamConverter
-     */
-    protected $configuration;
+    use ContextAwareParamConverterTrait;
 
     /**
      * @var Request
@@ -44,8 +40,8 @@ trait RequestParamAwareParamConverterTrait
      *
      * @return string
      */
-    protected function getRequestParamName(string $defaultName = 'id'): string
+    protected function getRequestParamName(string $defaultName = 'id'): ?string
     {
-        return $this->configuration->getOptions()['requestParam'] ?? $defaultName;
+        return $this->getOption('requestParam', $defaultName);
     }
 }
