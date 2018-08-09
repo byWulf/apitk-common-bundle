@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Shopping\ApiTKCommonBundle\Annotation;
+namespace Shopping\ApiTKCommonBundle\Annotation\ParamConverter;
 
 /**
  * Trait EntityAwareAnnotationTrait.
