@@ -15,8 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 trait RequestParamAwareParamConverterTrait
 {
-    use ContextAwareParamConverterTrait;
-
     /**
      * @var Request
      */

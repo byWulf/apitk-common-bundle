@@ -16,8 +16,6 @@ use Doctrine\Common\Persistence\ObjectManager;
  */
 trait EntityAwareParamConverterTrait
 {
-    use ContextAwareParamConverterTrait;
-
     /**
      * @var ManagerRegistry
      */
