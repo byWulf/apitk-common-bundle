@@ -56,4 +56,40 @@ trait EntityAwareParamConverterTrait
 
         return $this->registry->getManager($name);
     }
+
+    /**
+     * @param string|null $defaultName
+     *
+     * @return null|string
+     */
+    protected function getRepositoryMethodName(string $defaultName = null): ?string
+    {
+        return $this->configuration->getOptions()['methodName'] ?? $defaultName;
+    }
+
+    /**
+     * Call a given method on an EntityRepository.
+     *
+     * @param string $method
+     * @param mixed  ...$args
+     *
+     * @return mixed
+     */
+    protected function callRepositoryMethod(string $method, ...$args)
+    {
+        $om = $this->getManager();
+        $repo = $om->getRepository($this->getEntity());
+
+        if (!method_exists($repo, $method) || !is_callable([$repo, $method])) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'Method "%s" doesn\'t exist or isn\'t callable in EntityRepository "%s"',
+                    $method,
+                    get_class($repo)
+                )
+            );
+        }
+
+        return $repo->$method($args);
+    }
 }
