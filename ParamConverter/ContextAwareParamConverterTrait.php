@@ -77,6 +77,6 @@ trait ContextAwareParamConverterTrait
      */
     protected function getOption(string $optionName, $defaultValue = null)
     {
-        return $this->getOptions()->get($optionName) ?? $defaultValue;
+        return $this->getOptions()->has($optionName) ? $this->getOptions()->get($optionName) : $defaultValue;
     }
 }
