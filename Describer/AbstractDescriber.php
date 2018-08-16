@@ -4,6 +4,7 @@ namespace Shopping\ApiTKCommonBundle\Describer;
 
 use Doctrine\Common\Annotations\Reader;
 use EXSyst\Component\Swagger\Operation;
+use EXSyst\Component\Swagger\Path;
 use EXSyst\Component\Swagger\Swagger;
 use Nelmio\ApiDocBundle\Describer\DescriberInterface;
 use Shopping\ApiTKCommonBundle\Util\ControllerReflector;
@@ -61,7 +62,7 @@ abstract class AbstractDescriber implements DescriberInterface
 
                 foreach ($this->getMethodsToParse() as $classMethod => list($methodPath, $httpMethods)) {
                     if ($methodPath === $uri && in_array($method, $httpMethods)) {
-                        $this->handleOperation($operation, $classMethod);
+                        $this->handleOperation($operation, $classMethod, $path, $method);
                     }
                 }
             }
@@ -71,8 +72,15 @@ abstract class AbstractDescriber implements DescriberInterface
     /**
      * @param Operation         $operation
      * @param \ReflectionMethod $classMethod
+     * @param Path              $path
+     * @param string            $method
      */
-    abstract protected function handleOperation(Operation $operation, \ReflectionMethod $classMethod): void;
+    abstract protected function handleOperation(
+        Operation $operation,
+        \ReflectionMethod $classMethod,
+        Path $path,
+        string $method
+    ): void;
 
     /**
      * @return \Generator
