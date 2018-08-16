@@ -84,6 +84,6 @@ trait EntityAwareParamConverterTrait
             );
         }
 
-        return $repo->$method($args);
+        return $repo->$method(...$args);
     }
 }
