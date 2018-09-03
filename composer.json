@@ -1,6 +1,6 @@
 {
-  "name": "shopping/apitk-common-bundle",
-  "version": "1.0.1",
+  "name": "check24/apitk-common-bundle",
+  "version": "1.0.2",
   "license": "MIT",
   "type": "symfony-bundle",
   "description": "",
