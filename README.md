@@ -6,7 +6,7 @@ apitk-* bundles, mainly:
 ## Installation
 Install the package via composer:
 ```
-composer install check24/apitk-common-bundle
+composer require check24/apitk-common-bundle
 ```
 You usually don't have to install it by yourself, because it is only for other apitk-bundles.
 
