@@ -10,8 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
  * Trait RequestParamAwareParamConverterTrait.
  *
  * @package Shopping\ApiTKCommonBundle\ParamConverter
- *
- * @author Alexander Dormann <alexander.dormann@check24.de>
  */
 trait RequestParamAwareParamConverterTrait
 {

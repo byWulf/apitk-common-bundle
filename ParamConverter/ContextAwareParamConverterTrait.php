@@ -12,8 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
  * Trait ContextAwareParamConverterTrait.
  *
  * @package Shopping\ApiTKCommonBundle\ParamConverter
- *
- * @author Alexander Dormann <alexander.dormann@check24.de>
  */
 trait ContextAwareParamConverterTrait
 {
@@ -71,7 +69,7 @@ trait ContextAwareParamConverterTrait
 
     /**
      * @param string $optionName
-     * @param null   $defaultValue
+     * @param null $defaultValue
      *
      * @return mixed|null
      */

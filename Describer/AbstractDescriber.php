@@ -6,6 +6,7 @@ use Doctrine\Common\Annotations\Reader;
 use EXSyst\Component\Swagger\Operation;
 use EXSyst\Component\Swagger\Path;
 use EXSyst\Component\Swagger\Swagger;
+use Generator;
 use Nelmio\ApiDocBundle\Describer\DescriberInterface;
 use Shopping\ApiTKCommonBundle\Util\ControllerReflector;
 use Symfony\Component\Routing\RouteCollection;
@@ -14,8 +15,6 @@ use Symfony\Component\Routing\RouteCollection;
  * Class AbstractDescriber.
  *
  * @package Shopping\ApiTKCommonBundle\Describer
- *
- * @author Alexander Dormann <alexander.dormann@check24.de>
  */
 abstract class AbstractDescriber implements DescriberInterface
 {
@@ -52,7 +51,7 @@ abstract class AbstractDescriber implements DescriberInterface
     /**
      * @param Swagger $api
      */
-    public function describe(Swagger $api)
+    public function describe(Swagger $api): void
     {
         $paths = $api->getPaths();
         foreach ($paths as $uri => $path) {
@@ -83,9 +82,9 @@ abstract class AbstractDescriber implements DescriberInterface
     ): void;
 
     /**
-     * @return \Generator
+     * @return Generator
      */
-    protected function getMethodsToParse(): \Generator
+    protected function getMethodsToParse(): Generator
     {
         foreach ($this->routeCollection->all() as $route) {
             if (!$route->hasDefault('_controller')) {

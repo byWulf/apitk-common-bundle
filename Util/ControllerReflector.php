@@ -4,14 +4,29 @@ declare(strict_types=1);
 
 namespace Shopping\ApiTKCommonBundle\Util;
 
+use ReflectionMethod;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Class ControllerReflector.
+ *
+ * @package Shopping\ApiTKCommonBundle\Util
+ */
 final class ControllerReflector
 {
+    /**
+     * @var ContainerInterface
+     */
     private $container;
 
+    /**
+     * @var array<string, string> <class, method>
+     */
     private $controllers = [];
 
+    /**
+     * ControllerReflector constructor.
+     */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
@@ -24,7 +39,7 @@ final class ControllerReflector
      *
      * @return \ReflectionMethod|null
      */
-    public function getReflectionMethod(string $controller)
+    public function getReflectionMethod(string $controller): ?ReflectionMethod
     {
         $callable = $this->getClassAndMethod($controller);
         if (null === $callable) {
@@ -34,36 +49,43 @@ final class ControllerReflector
         list($class, $method) = $callable;
 
         try {
-            return new \ReflectionMethod($class, $method);
+            return new ReflectionMethod($class, $method);
         } catch (\ReflectionException $e) {
             // In case we can't reflect the controller, we just
             // ignore the route
         }
-    }
 
-    public function getReflectionClassAndMethod(string $controller)
-    {
-        $callable = $this->getClassAndMethod($controller);
-        if (null === $callable) {
-            return null;
-        }
-
-        list($class, $method) = $callable;
-
-        try {
-            return [new \ReflectionClass($class), new \ReflectionMethod($class, $method)];
-        } catch (\ReflectionException $e) {
-            // In case we can't reflect the controller, we just
-            // ignore the route
-        }
+        return null;
     }
 
     /**
      * @param string $controller
-     *
      * @return array|null
      */
-    private function getClassAndMethod(string $controller)
+    public function getReflectionClassAndMethod(string $controller): ?array
+    {
+        $callable = $this->getClassAndMethod($controller);
+        if (null === $callable) {
+            return null;
+        }
+
+        list($class, $method) = $callable;
+
+        try {
+            return [new \ReflectionClass($class), new ReflectionMethod($class, $method)];
+        } catch (\ReflectionException $e) {
+            // In case we can't reflect the controller, we just
+            // ignore the route
+        }
+
+        return null;
+    }
+
+    /**
+     * @param string $controller
+     * @return array|null
+     */
+    private function getClassAndMethod(string $controller): ?array
     {
         if (!isset($this->controllers[$controller])) {
             $this->controllers[$controller] = $this->detectClassAndMethod($controller);
