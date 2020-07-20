@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.1] - 2020-07-27
+### Fixed
+* Deprecation introduced with Symfony 5.1: Autowiring ContainerInterface will be dropped in 6.x 
+
 ## [2.0.0] - 2020-03-20
 ### Added
 * Support for Symfony 5.0
