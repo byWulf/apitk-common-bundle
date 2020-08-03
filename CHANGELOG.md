@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [2.0.1] - 2020-07-27
+### Changed
+* Bump symfony/http-foundation from 5.0.5 to 5.0.7
+
 ### Fixed
 * Deprecation introduced with Symfony 5.1: Autowiring ContainerInterface will be dropped in 6.x 
 
