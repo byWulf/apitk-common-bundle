@@ -6,7 +6,6 @@ namespace Shopping\ApiTKCommonBundle\Describer;
 
 use EXSyst\Component\Swagger\Schema;
 use function in_array;
-use MyCLabs\Enum\Enum;
 use Nelmio\ApiDocBundle\Model\Model;
 use Nelmio\ApiDocBundle\ModelDescriber\ModelDescriberInterface;
 use Symfony\Component\PropertyInfo\Type;
@@ -26,7 +25,7 @@ class EnumDescriber implements ModelDescriberInterface
             return false;
         }
 
-        return in_array(Enum::class, class_parents(
+        return in_array('MyCLabs\Enum\Enum', class_parents(
             $model->getType()->getClassName()
         ));
     }
