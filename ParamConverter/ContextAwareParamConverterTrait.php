@@ -32,9 +32,6 @@ trait ContextAwareParamConverterTrait
 
     /**
      * Set request and configuration context as class properties for easy access.
-     *
-     * @param Request        $request
-     * @param ParamConverter $configuration
      */
     protected function initialize(Request $request, ParamConverter $configuration): void
     {
@@ -43,32 +40,22 @@ trait ContextAwareParamConverterTrait
         $this->options = new ParameterBag($configuration->getOptions());
     }
 
-    /**
-     * @return ParamConverter
-     */
     protected function getConfiguration(): ParamConverter
     {
         return $this->configuration;
     }
 
-    /**
-     * @return Request
-     */
     protected function getRequest(): Request
     {
         return $this->request;
     }
 
-    /**
-     * @return ParameterBag
-     */
     public function getOptions(): ParameterBag
     {
         return $this->options;
     }
 
     /**
-     * @param string $optionName
      * @param null $defaultValue
      *
      * @return mixed|null
