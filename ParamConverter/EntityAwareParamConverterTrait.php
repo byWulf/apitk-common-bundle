@@ -21,25 +21,16 @@ trait EntityAwareParamConverterTrait
      */
     protected $registry;
 
-    /**
-     * @param ManagerRegistry $registry
-     */
     public function setRegistry(ManagerRegistry $registry): void
     {
         $this->registry = $registry;
     }
 
-    /**
-     * @return null|string
-     */
     protected function getEntity(): ?string
     {
         return $this->getOption('entity', null);
     }
 
-    /**
-     * @return ObjectManager|null
-     */
     protected function getManager(): ?ObjectManager
     {
         if ($this->registry === null) {
@@ -55,11 +46,6 @@ trait EntityAwareParamConverterTrait
         return $this->registry->getManager($name);
     }
 
-    /**
-     * @param string|null $defaultName
-     *
-     * @return null|string
-     */
     protected function getRepositoryMethodName(string $defaultName = null): ?string
     {
         return $this->getOption('methodName', $defaultName);
@@ -68,8 +54,7 @@ trait EntityAwareParamConverterTrait
     /**
      * Call a given method on an EntityRepository.
      *
-     * @param string $method
-     * @param mixed  ...$args
+     * @param mixed ...$args
      *
      * @return mixed
      */

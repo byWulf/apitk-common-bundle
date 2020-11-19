@@ -2,3 +2,8 @@ services:
     Shopping\ApiTKCommonBundle\Util\ControllerReflector:
         arguments:
             $container: '@service_container'
+
+    Shopping\ApiTKCommonBundle\Describer\EnumDescriber:
+        public: false
+        tags:
+            - { name: 'nelmio_api_doc.model_describer', priority: 2000 }

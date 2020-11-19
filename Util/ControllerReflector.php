@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Shopping\ApiTKCommonBundle\Util;
 
+use ReflectionClass;
+use ReflectionException;
 use ReflectionMethod;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -34,10 +36,6 @@ final class ControllerReflector
 
     /**
      * Returns the ReflectionMethod for the given controller string.
-     *
-     * @param string $controller
-     *
-     * @return \ReflectionMethod|null
      */
     public function getReflectionMethod(string $controller): ?ReflectionMethod
     {
@@ -50,7 +48,7 @@ final class ControllerReflector
 
         try {
             return new ReflectionMethod($class, $method);
-        } catch (\ReflectionException $e) {
+        } catch (ReflectionException $e) {
             // In case we can't reflect the controller, we just
             // ignore the route
         }
@@ -58,10 +56,6 @@ final class ControllerReflector
         return null;
     }
 
-    /**
-     * @param string $controller
-     * @return array|null
-     */
     public function getReflectionClassAndMethod(string $controller): ?array
     {
         $callable = $this->getClassAndMethod($controller);
@@ -72,8 +66,8 @@ final class ControllerReflector
         list($class, $method) = $callable;
 
         try {
-            return [new \ReflectionClass($class), new ReflectionMethod($class, $method)];
-        } catch (\ReflectionException $e) {
+            return [new ReflectionClass($class), new ReflectionMethod($class, $method)];
+        } catch (ReflectionException $e) {
             // In case we can't reflect the controller, we just
             // ignore the route
         }
@@ -81,10 +75,6 @@ final class ControllerReflector
         return null;
     }
 
-    /**
-     * @param string $controller
-     * @return array|null
-     */
     private function getClassAndMethod(string $controller): ?array
     {
         if (!isset($this->controllers[$controller])) {
@@ -95,12 +85,12 @@ final class ControllerReflector
     }
 
     /**
-     * @param string $controller
-     *
      * @return array|null [$class, $method]
      */
     private function detectClassAndMethod(string $controller): ?array
     {
+        $matches = [];
+
         if (preg_match('#(.+)::([\w]+)#', $controller, $matches)) {
             $class = $matches[1];
             $method = $matches[2];

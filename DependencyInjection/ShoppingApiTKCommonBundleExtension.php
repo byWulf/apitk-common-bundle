@@ -21,9 +21,6 @@ class ShoppingApiTKCommonBundleExtension extends Extension
     /**
      * Loads a specific configuration.
      *
-     * @param array            $configs
-     * @param ContainerBuilder $container
-     *
      * @throws \Exception
      */
     public function load(array $configs, ContainerBuilder $container)

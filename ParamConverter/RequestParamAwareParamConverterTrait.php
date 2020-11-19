@@ -18,12 +18,6 @@ trait RequestParamAwareParamConverterTrait
      */
     protected $request;
 
-    /**
-     * @param string|null $defaultValue
-     * @param string      $defaultName
-     *
-     * @return null|string
-     */
     protected function getRequestParamValue(string $defaultValue = null, string $defaultName = 'id'): ?string
     {
         $paramName = $this->getRequestParamName($defaultName);
@@ -32,8 +26,6 @@ trait RequestParamAwareParamConverterTrait
     }
 
     /**
-     * @param string $defaultName
-     *
      * @return string
      */
     protected function getRequestParamName(string $defaultName = 'id'): ?string

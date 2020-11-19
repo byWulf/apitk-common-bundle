@@ -33,11 +33,6 @@ abstract class AbstractDescriber implements DescriberInterface
      */
     protected $reader;
 
-    /**
-     * @param RouteCollection     $routeCollection
-     * @param ControllerReflector $controllerReflector
-     * @param Reader              $reader
-     */
     public function __construct(
         RouteCollection $routeCollection,
         ControllerReflector $controllerReflector,
@@ -48,9 +43,6 @@ abstract class AbstractDescriber implements DescriberInterface
         $this->reader = $reader;
     }
 
-    /**
-     * @param Swagger $api
-     */
     public function describe(Swagger $api): void
     {
         $paths = $api->getPaths();
@@ -68,12 +60,6 @@ abstract class AbstractDescriber implements DescriberInterface
         }
     }
 
-    /**
-     * @param Operation         $operation
-     * @param \ReflectionMethod $classMethod
-     * @param Path              $path
-     * @param string            $method
-     */
     abstract protected function handleOperation(
         Operation $operation,
         \ReflectionMethod $classMethod,
@@ -81,9 +67,6 @@ abstract class AbstractDescriber implements DescriberInterface
         string $method
     ): void;
 
-    /**
-     * @return Generator
-     */
     protected function getMethodsToParse(): Generator
     {
         foreach ($this->routeCollection->all() as $route) {
@@ -92,7 +75,9 @@ abstract class AbstractDescriber implements DescriberInterface
             }
 
             $controller = $route->getDefault('_controller');
-            if ($callable = $this->controllerReflector->getReflectionClassAndMethod($controller)) {
+            $callable = $this->controllerReflector->getReflectionClassAndMethod($controller);
+
+            if ($callable) {
                 $path = $this->normalizePath($route->getPath());
                 $httpMethods = $route->getMethods() ?: Swagger::$METHODS;
                 $httpMethods = array_map('strtolower', $httpMethods);
@@ -107,11 +92,6 @@ abstract class AbstractDescriber implements DescriberInterface
         }
     }
 
-    /**
-     * @param string $path
-     *
-     * @return string
-     */
     protected function normalizePath(string $path): string
     {
         if ('.{_format}' === substr($path, -10)) {
