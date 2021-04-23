@@ -1,13 +1,16 @@
 # apitk-common-bundle
 
 Contains classes, interfaces and traits that are shared between
-apitk-* bundles, mainly:
+apitk-\* bundles, mainly:
 
 ## Installation
+
 Install the package via composer:
+
 ```
 composer require check24/apitk-common-bundle
 ```
+
 You usually don't have to install it by yourself, because it is only for other apitk-bundles.
 
 ## Components
@@ -16,12 +19,10 @@ You usually don't have to install it by yourself, because it is only for other a
 
 Useful traits for your ParamConverter Annotation:
 
-* __EntityAwareAnnotationTrait__   
+- **EntityAwareAnnotationTrait**  
   Adds `entity`, `entityManager` and `methodName` options
-  
-* __RequestParamAwareAnnotationTrait__  
+- **RequestParamAwareAnnotationTrait**  
   Adds `requestParam` option
-
 
 #### Describer/AbstractDescriber
 
@@ -34,19 +35,14 @@ Useful traits for your ParamConverter logic:
 ContextAwareParamConverterTrait.php
 EntityAwareParamConverterTrait.php
 
-* __ContextAwareParamConverterTrait__   
+- **ContextAwareParamConverterTrait**  
   Provides `$this->getOption('name', 'default')` convenience methods
   to access annotation options easily.
-  
-* __EntityAwareParamConverterTrait__  
+- **EntityAwareParamConverterTrait**  
   Adds `getEntity()`, `getEntityManager()` and `callRepositoryMethod()`
   convenience to access an entity, its appropriate entity manager and
   repository for the given Annotation options.
-  
-* __RequestParamAwareParamConverterTrait__  
+- **RequestParamAwareParamConverterTrait**  
   Adds `getRequestParam()` and `getRequestParamValue()` methods to access
   a request param given by Annotation options easily. It's also possible to
   define defaults here.
-  
-  
-
