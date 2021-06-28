@@ -3,4 +3,5 @@
 .vagrant
 /phpunit.xml
 .phpunit
+.phpunit.result.cache
 /.php_cs.cache

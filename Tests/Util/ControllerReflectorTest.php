@@ -3,6 +3,7 @@
 namespace Shopping\ApiTKCommonBundle\Tests\Util;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Shopping\ApiTKCommonBundle\Util\ControllerReflector;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -15,6 +16,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class ControllerReflectorTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var ContainerInterface
      */
@@ -25,7 +28,7 @@ class ControllerReflectorTest extends TestCase
      */
     private $reflector;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -33,7 +36,7 @@ class ControllerReflectorTest extends TestCase
         $this->reflector = new ControllerReflector($this->containerInterface->reveal());
     }
 
-    public function testResolveSimpleDoublePoint()
+    public function testResolveSimpleDoublePoint(): void
     {
         $controller = new ControllerExample();
 
@@ -49,7 +52,7 @@ class ControllerReflectorTest extends TestCase
         $actual = $this->reflector
             ->getReflectionClassAndMethod('Shopping\ApiTKCommonBundle\Tests\Util\ControllerExample:someAction');
 
-        $this->assertInternalType('array', $actual);
+        $this->assertIsArray($actual);
         $this->assertCount(2, $actual);
 
         list($class, $method) = $actual;
@@ -62,7 +65,7 @@ class ControllerReflectorTest extends TestCase
         $this->assertEquals('someAction', $method->getName());
     }
 
-    public function testResolveControllerOnly()
+    public function testResolveControllerOnly(): void
     {
         $this->containerInterface->has(MagicControllerExample::class)->shouldNotBeCalled();
         $this->containerInterface->get(MagicControllerExample::class)->shouldNotBeCalled();
@@ -70,7 +73,7 @@ class ControllerReflectorTest extends TestCase
         $actual = $this->reflector
             ->getReflectionClassAndMethod('Shopping\ApiTKCommonBundle\Tests\Util\MagicControllerExample');
 
-        $this->assertInternalType('array', $actual);
+        $this->assertIsArray($actual);
         $this->assertCount(2, $actual);
 
         list($class, $method) = $actual;
@@ -83,7 +86,7 @@ class ControllerReflectorTest extends TestCase
         $this->assertEquals('__invoke', $method->getName());
     }
 
-    public function testResolveFQCN()
+    public function testResolveFQCN(): void
     {
         $this->containerInterface->has(ControllerExample::class)->shouldNotBeCalled();
         $this->containerInterface->get(ControllerExample::class)->shouldNotBeCalled();
@@ -91,7 +94,7 @@ class ControllerReflectorTest extends TestCase
         $actual = $this->reflector
             ->getReflectionClassAndMethod('Shopping\ApiTKCommonBundle\Tests\Util\ControllerExample::anotherAction');
 
-        $this->assertInternalType('array', $actual);
+        $this->assertIsArray($actual);
         $this->assertCount(2, $actual);
 
         list($class, $method) = $actual;
