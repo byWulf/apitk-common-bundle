@@ -11,7 +11,7 @@
                 "options": []
             },
             {
-                "action": "php ./vendor/bin/phpstan analyse -l 1 -c phpstan.neon .",
+                "action": "php ./vendor/bin/phpstan analyse -c phpstan.neon .",
                 "options": []
             },
             {
