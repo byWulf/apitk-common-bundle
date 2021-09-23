@@ -7,13 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.2.0] - 2021-08-30
+## [2.3.0] - 2021-08-30
 
 ### Added
 
 - Support for sensio/framework-extra-bundle 6.x
 
-## [2.1.0] - 2021-06-28
+## [2.2.0] - 2021-06-28
 
 ### Added
 
