@@ -16,7 +16,7 @@ class EnumDescriber implements ModelDescriberInterface
     {
         $className = $model->getType()->getClassName();
         $schema->setType('enum');
-        $schema->setEnum(array_values($className::toArray()));
+        $schema->setEnum([$className]);
     }
 
     public function supports(Model $model): bool
@@ -25,8 +25,14 @@ class EnumDescriber implements ModelDescriberInterface
             return false;
         }
 
-        return in_array('MyCLabs\Enum\Enum', class_parents(
-            $model->getType()->getClassName()
-        ));
+        $className = (string) $model->getType()->getClassName();
+        $classParents = class_parents($className);
+
+        if (!$classParents) {
+            return false;
+        }
+
+        /** @phpstan-ignore-next-line  */
+        return in_array('MyCLabs\Enum\Enum', $classParents, true);
     }
 }

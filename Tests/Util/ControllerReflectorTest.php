@@ -4,6 +4,7 @@ namespace Shopping\ApiTKCommonBundle\Tests\Util;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Shopping\ApiTKCommonBundle\Util\ControllerReflector;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -19,7 +20,7 @@ class ControllerReflectorTest extends TestCase
     use ProphecyTrait;
 
     /**
-     * @var ContainerInterface
+     * @var ContainerInterface|ObjectProphecy
      */
     private $containerInterface;
 
@@ -117,11 +118,11 @@ class ControllerReflectorTest extends TestCase
  */
 class ControllerExample
 {
-    public function someAction()
+    public function someAction(): void
     {
     }
 
-    public function anotherAction()
+    public function anotherAction(): void
     {
     }
 }
@@ -135,7 +136,7 @@ class ControllerExample
  */
 class MagicControllerExample
 {
-    public function __invoke()
+    public function __invoke(): void
     {
     }
 }

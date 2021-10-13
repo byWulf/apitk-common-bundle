@@ -1,32 +1,34 @@
 <?php
 
-return PhpCsFixer\Config::create()
+$finder = PhpCsFixer\Finder::create()
+    ->in([__DIR__])
+    ->exclude(['vendor'])
+    ->ignoreVCSIgnored(true)
+    ->name('*.php');
+
+return (new PhpCsFixer\Config())
     ->setRiskyAllowed(true)
     ->setRules([
-        '@PHP56Migration' => true,
-        '@PHPUnit60Migration:risky' => false,
         '@Symfony' => true,
         '@Symfony:risky' => false,
         'align_multiline_comment' => true,
         'array_syntax' => ['syntax' => 'short'],
         'blank_line_before_statement' => true,
-        'class_attributes_separation' => true,
         'concat_space' => ['spacing' => 'one'],
         'combine_consecutive_issets' => true,
         'combine_consecutive_unsets' => true,
         'compact_nullable_typehint' => true,
         'final_class' => false,
         'final_public_method_for_abstract_class' => false,
-        'final_static_access' => true,
         'function_typehint_space' => true,
         'heredoc_to_nowdoc' => true,
         'is_null' => true,
         'list_syntax' => ['syntax' => 'long'],
-        'method_argument_space' => ['ensure_fully_multiline' => true],
+        'method_argument_space' => ['on_multiline' => 'ensure_fully_multiline'],
         'native_function_type_declaration_casing' => true,
-        'no_extra_consecutive_blank_lines' => ['tokens' => ['break', 'continue', 'extra', 'return', 'throw', 'use', 'parenthesis_brace_block', 'square_brace_block', 'curly_brace_block']],
+        'no_extra_blank_lines' => ['tokens' => ['break', 'continue', 'extra', 'return', 'throw', 'use', 'parenthesis_brace_block', 'square_brace_block', 'curly_brace_block']],
         'no_null_property_initialization' => true,
-        'no_short_echo_tag' => true,
+        'echo_tag_syntax' => ['format' => 'long'],
         'no_superfluous_elseif' => true,
         'no_superfluous_phpdoc_tags' => false,
         'no_unneeded_curly_braces' => true,
@@ -57,14 +59,7 @@ return PhpCsFixer\Config::create()
         'single_trait_insert_per_statement' => true,
         'strict_comparison' => false,
         'strict_param' => false,
-        'yoda_style' => null,
+        'yoda_style' => false,
+        'class_attributes_separation' => false,
     ])
-    ->setFinder(
-        PhpCsFixer\Finder::create()
-            ->in([
-                __DIR__,
-            ])
-            ->notPath('vendor')
-            ->name('*.php')
-    )
-;
+    ->setFinder($finder);

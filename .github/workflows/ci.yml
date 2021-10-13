@@ -13,6 +13,7 @@ jobs:
       matrix:
         php-version:
           - "7.4"
+          - "8.0"
 
     steps:
       - name: "Checkout"
@@ -39,5 +40,3 @@ jobs:
       - name: "Run pre-commit tests"
         run: "php vendor/bin/captainhook hook:pre-commit"
 
-      - name: "Run pre-push tests"
-        run: "php vendor/bin/captainhook hook:pre-push"
