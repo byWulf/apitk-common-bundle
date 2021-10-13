@@ -8,6 +8,7 @@ use EXSyst\Component\Swagger\Path;
 use EXSyst\Component\Swagger\Swagger;
 use Generator;
 use Nelmio\ApiDocBundle\Describer\DescriberInterface;
+use ReflectionMethod;
 use Shopping\ApiTKCommonBundle\Util\ControllerReflector;
 use Symfony\Component\Routing\RouteCollection;
 
@@ -18,20 +19,11 @@ use Symfony\Component\Routing\RouteCollection;
  */
 abstract class AbstractDescriber implements DescriberInterface
 {
-    /**
-     * @var RouteCollection
-     */
-    protected $routeCollection;
+    protected RouteCollection $routeCollection;
 
-    /**
-     * @var ControllerReflector
-     */
-    protected $controllerReflector;
+    protected ControllerReflector $controllerReflector;
 
-    /**
-     * @var Reader
-     */
-    protected $reader;
+    protected Reader $reader;
 
     public function __construct(
         RouteCollection $routeCollection,
@@ -62,11 +54,14 @@ abstract class AbstractDescriber implements DescriberInterface
 
     abstract protected function handleOperation(
         Operation $operation,
-        \ReflectionMethod $classMethod,
+        ReflectionMethod $classMethod,
         Path $path,
         string $method
     ): void;
 
+    /**
+     * @phpstan-ignore-next-line
+     */
     protected function getMethodsToParse(): Generator
     {
         foreach ($this->routeCollection->all() as $route) {

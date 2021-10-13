@@ -16,13 +16,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 final class ControllerReflector
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
+    private ContainerInterface $container;
 
     /**
-     * @var array<string, string> <class, method>
+     * @var array<string, array|null>
      */
     private $controllers = [];
 
@@ -56,6 +53,11 @@ final class ControllerReflector
         return null;
     }
 
+    /**
+     * @param string $controller
+     *
+     * @return array<int, ReflectionClass|ReflectionMethod>|null
+     */
     public function getReflectionClassAndMethod(string $controller): ?array
     {
         $callable = $this->getClassAndMethod($controller);
@@ -75,6 +77,11 @@ final class ControllerReflector
         return null;
     }
 
+    /**
+     * @param string $controller
+     *
+     * @return array<string, array|null>|null
+     */
     private function getClassAndMethod(string $controller): ?array
     {
         if (!isset($this->controllers[$controller])) {
@@ -85,7 +92,7 @@ final class ControllerReflector
     }
 
     /**
-     * @return array|null [$class, $method]
+     * @return array<int, string>|null
      */
     private function detectClassAndMethod(string $controller): ?array
     {
@@ -104,7 +111,13 @@ final class ControllerReflector
             }
 
             if ($this->container->has($controller)) {
-                $class = get_class($this->container->get($controller));
+                $object = $this->container->get($controller);
+
+                if ($object === null) {
+                    return null;
+                }
+
+                $class = get_class($object);
 
                 if (!isset($method) && method_exists($class, '__invoke')) {
                     $method = '__invoke';
@@ -112,7 +125,7 @@ final class ControllerReflector
             }
         }
 
-        if (!isset($class) || !isset($method)) {
+        if (!isset($class, $method)) {
             return null;
         }
 
