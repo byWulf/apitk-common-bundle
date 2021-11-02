@@ -30,7 +30,6 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "nelmio/api-doc-bundle": "^3.2",
-        "phpstan/phpstan-deprecation-rules": "^0.12.6",
         "sensio/framework-extra-bundle": "^5.3 || ^6.0",
         "symfony/config": ">= 5.3 <6.0",
         "symfony/dependency-injection": ">= 5.3 <6.0",
@@ -45,6 +44,7 @@
         "phpmd/phpmd": "^2.6",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-deprecation-rules": "^0.12.6",
         "phpunit/phpunit": "^9.3",
         "symfony/phpunit-bridge": "^4.0"
     },
