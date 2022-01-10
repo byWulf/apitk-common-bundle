@@ -15,11 +15,13 @@
     ],
     "autoload": {
         "psr-4": {
-            "Shopping\\ApiTKCommonBundle\\": ""
-        },
-        "exclude-from-classmap": [
-            "/Tests/"
-        ]
+            "Shopping\\ApiTKCommonBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Shopping\\ApiTKCommonBundle\\Tests\\": "Tests/"
+        }
     },
     "config": {
         "preferred-install": {
@@ -53,8 +55,8 @@
             "\\SebastianFeldmann\\CaptainHook\\Composer\\Cmd::install"
         ],
         "test:php-cs-fixer": "@php vendor/bin/php-cs-fixer fix --verbose --dry-run",
-        "test:phpstan": "@php vendor/bin/phpstan analyse -c phpstan.neon .",
-        "test:phpmd": "@php vendor/bin/phpmd ./ text ruleset.xml --exclude vendor",
+        "test:phpstan": "@php vendor/bin/phpstan analyse -c phpstan.neon",
+        "test:phpmd": "@php vendor/bin/phpmd ./src text ruleset.xml --exclude vendor",
         "test:phpunit": "@php vendor/bin/phpunit --verbose",
         "test": [
             "@test:php-cs-fixer",

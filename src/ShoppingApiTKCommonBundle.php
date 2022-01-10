@@ -14,4 +14,9 @@ class ShoppingApiTKCommonBundle extends Bundle
     {
         return new ShoppingApiTKCommonBundleExtension();
     }
+
+    public function getPath(): string
+    {
+        return dirname(__DIR__);
+    }
 }

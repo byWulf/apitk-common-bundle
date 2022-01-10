@@ -1,11 +1,7 @@
 parameters:
     level: 8
     paths:
-        - .
-    excludePaths:
-        - ./vendor
-        - ./DependencyInjection
-        - ./Tests
+        - ./src
     checkGenericClassInNonGenericObjectType: false
 includes:
     - vendor/phpstan/phpstan-deprecation-rules/rules.neon
