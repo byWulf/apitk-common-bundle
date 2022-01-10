@@ -10,25 +10,19 @@ use ReflectionMethod;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class ControllerReflector.
- *
- * @package Shopping\ApiTKCommonBundle\Util
+ * @template T
  */
 final class ControllerReflector
 {
-    private ContainerInterface $container;
-
     /**
-     * @var array<string, array|null>
+     * @var array<string, array{0: string, 1: string}|null>
+     * @phpstan-var array<string, array{0: class-string<T>, 1: string}|null>
      */
-    private $controllers = [];
+    private array $controllers = [];
 
-    /**
-     * ControllerReflector constructor.
-     */
-    public function __construct(ContainerInterface $container)
-    {
-        $this->container = $container;
+    public function __construct(
+        private ContainerInterface $container
+    ) {
     }
 
     /**
@@ -54,9 +48,7 @@ final class ControllerReflector
     }
 
     /**
-     * @param string $controller
-     *
-     * @return array<int, ReflectionClass|ReflectionMethod>|null
+     * @return array{0: ReflectionClass, 1: ReflectionMethod}|null
      */
     public function getReflectionClassAndMethod(string $controller): ?array
     {
@@ -78,9 +70,7 @@ final class ControllerReflector
     }
 
     /**
-     * @param string $controller
-     *
-     * @return array<string, array|null>|null
+     * @return array{0: class-string<T>, 1: string}|null
      */
     private function getClassAndMethod(string $controller): ?array
     {
@@ -92,7 +82,7 @@ final class ControllerReflector
     }
 
     /**
-     * @return array<int, string>|null
+     * @return array{0: class-string<T>, 1: string}|null
      */
     private function detectClassAndMethod(string $controller): ?array
     {

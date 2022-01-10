@@ -9,17 +9,9 @@ use Doctrine\Persistence\ObjectManager;
 use InvalidArgumentException;
 use Shopping\ApiTKCommonBundle\Exception\MissingDependencyException;
 
-/**
- * Trait EntityAwareParamConverterTrait.
- *
- * @package Shopping\ApiTKCommonBundle\ParamConverter
- */
 trait EntityAwareParamConverterTrait
 {
-    /**
-     * @var ManagerRegistry|null
-     */
-    protected $registry;
+    protected ?ManagerRegistry $registry;
 
     public function setRegistry(ManagerRegistry $registry): void
     {
@@ -55,8 +47,6 @@ trait EntityAwareParamConverterTrait
      * Call a given method on an EntityRepository.
      *
      * @param mixed ...$args
-     *
-     * @return mixed
      */
     protected function callRepositoryMethod(string $method, ...$args)
     {

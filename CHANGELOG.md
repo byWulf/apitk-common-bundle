@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.0] - 2022-01-10
+
+### Added
+- Support for Symfony 6.0
+
+### Changed
+- Use php8 syntax in project
+- Update github actions to run most possible symfony+php combinations
+
+### Removed
+- Support for PHP 7.4
+
 ## [3.0.1] - 2021-11-02
 
 ### Fixed

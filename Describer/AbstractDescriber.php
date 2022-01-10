@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopping\ApiTKCommonBundle\Describer;
 
 use Doctrine\Common\Annotations\Reader;
@@ -12,27 +14,13 @@ use ReflectionMethod;
 use Shopping\ApiTKCommonBundle\Util\ControllerReflector;
 use Symfony\Component\Routing\RouteCollection;
 
-/**
- * Class AbstractDescriber.
- *
- * @package Shopping\ApiTKCommonBundle\Describer
- */
 abstract class AbstractDescriber implements DescriberInterface
 {
-    protected RouteCollection $routeCollection;
-
-    protected ControllerReflector $controllerReflector;
-
-    protected Reader $reader;
-
     public function __construct(
-        RouteCollection $routeCollection,
-        ControllerReflector $controllerReflector,
-        Reader $reader
+        protected RouteCollection $routeCollection,
+        protected ControllerReflector $controllerReflector,
+        protected Reader $reader
     ) {
-        $this->routeCollection = $routeCollection;
-        $this->controllerReflector = $controllerReflector;
-        $this->reader = $reader;
     }
 
     public function describe(Swagger $api): void
@@ -89,7 +77,7 @@ abstract class AbstractDescriber implements DescriberInterface
 
     protected function normalizePath(string $path): string
     {
-        if ('.{_format}' === substr($path, -10)) {
+        if (str_ends_with($path, '.{_format}')) {
             $path = substr($path, 0, -10);
         }
 

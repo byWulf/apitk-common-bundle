@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shopping\ApiTKCommonBundle\Tests\Util;
 
 use PHPUnit\Framework\TestCase;
@@ -8,13 +10,6 @@ use Prophecy\Prophecy\ObjectProphecy;
 use Shopping\ApiTKCommonBundle\Util\ControllerReflector;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * Class ControllerReflectorTest.
- *
- * @package Shopping\ApiTKCommonBundle\Tests
- *
- * @author Alexander Dormann <alexander.dormann@check24.de>
- */
 class ControllerReflectorTest extends TestCase
 {
     use ProphecyTrait;
@@ -111,10 +106,6 @@ class ControllerReflectorTest extends TestCase
 
 /**
  * Stub ControllerExample.
- *
- * @package Shopping\ApiTKCommonBundle\Tests
- *
- * @author Alexander Dormann <alexander.dormann@check24.de>
  */
 class ControllerExample
 {
@@ -129,10 +120,6 @@ class ControllerExample
 
 /**
  * Stub MagicControllerExample.
- *
- * @package Shopping\ApiTKCommonBundle\Tests
- *
- * @author Alexander Dormann <alexander.dormann@check24.de>
  */
 class MagicControllerExample
 {

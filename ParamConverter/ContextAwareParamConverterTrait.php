@@ -8,27 +8,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * Trait ContextAwareParamConverterTrait.
- *
- * @package Shopping\ApiTKCommonBundle\ParamConverter
- */
 trait ContextAwareParamConverterTrait
 {
-    /**
-     * @var ParamConverter
-     */
-    protected $configuration;
+    protected ParamConverter $configuration;
 
-    /**
-     * @var ParameterBag
-     */
-    protected $options;
+    protected ParameterBag $options;
 
-    /**
-     * @var Request
-     */
-    protected $request;
+    protected Request $request;
 
     /**
      * Set request and configuration context as class properties for easy access.
@@ -60,7 +46,7 @@ trait ContextAwareParamConverterTrait
      *
      * @return mixed|null
      */
-    protected function getOption(string $optionName, $defaultValue = null)
+    protected function getOption(string $optionName, mixed $defaultValue = null): mixed
     {
         return $this->getOptions()->has($optionName) ? $this->getOptions()->get($optionName) : $defaultValue;
     }

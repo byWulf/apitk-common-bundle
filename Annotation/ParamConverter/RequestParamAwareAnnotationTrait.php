@@ -4,19 +4,9 @@ declare(strict_types=1);
 
 namespace Shopping\ApiTKCommonBundle\Annotation\ParamConverter;
 
-/**
- * Trait RequestParamAwareAnnotationTrait.
- *
- * @package Shopping\ApiTKCommonBundle\Annotation
- *
- * @author Alexander Dormann <alexander.dormann@check24.de>
- */
 trait RequestParamAwareAnnotationTrait
 {
-    /**
-     * @param $requestParam
-     */
-    public function setRequestParam($requestParam)
+    public function setRequestParam(string $requestParam): void
     {
         $options = $this->getOptions();
         $options['requestParam'] = $requestParam;

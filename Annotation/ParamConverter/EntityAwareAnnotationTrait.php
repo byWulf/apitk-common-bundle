@@ -4,19 +4,11 @@ declare(strict_types=1);
 
 namespace Shopping\ApiTKCommonBundle\Annotation\ParamConverter;
 
-/**
- * Trait EntityAwareAnnotationTrait.
- *
- * @package Shopping\ApiTKCommonBundle\Annotation
- *
- * @author Alexander Dormann <alexander.dormann@check24.de>
- */
+use Doctrine\ORM\EntityManagerInterface;
+
 trait EntityAwareAnnotationTrait
 {
-    /**
-     * @param $entityName
-     */
-    public function setEntity($entityName)
+    public function setEntity(string $entityName): void
     {
         $options = $this->getOptions();
         $options['entity'] = $entityName;
@@ -24,10 +16,7 @@ trait EntityAwareAnnotationTrait
         $this->setOptions($options);
     }
 
-    /**
-     * @param $manager
-     */
-    public function setEntityManager($manager)
+    public function setEntityManager(EntityManagerInterface $manager): void
     {
         $options = $this->getOptions();
         $options['entityManager'] = $manager;
@@ -35,10 +24,7 @@ trait EntityAwareAnnotationTrait
         $this->setOptions($options);
     }
 
-    /**
-     * @param $methodName
-     */
-    public function setMethodName($methodName)
+    public function setMethodName(string $methodName): void
     {
         $options = $this->getOptions();
         $options['methodName'] = $methodName;
