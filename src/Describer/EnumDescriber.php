@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Shopping\ApiTKCommonBundle\Describer;
 
-use EXSyst\Component\Swagger\Schema;
 use function in_array;
 use Nelmio\ApiDocBundle\Model\Model;
 use Nelmio\ApiDocBundle\ModelDescriber\ModelDescriberInterface;
+use OpenApi\Annotations\Schema;
 use Symfony\Component\PropertyInfo\Type;
 
 class EnumDescriber implements ModelDescriberInterface
@@ -15,8 +15,8 @@ class EnumDescriber implements ModelDescriberInterface
     public function describe(Model $model, Schema $schema): void
     {
         $className = $model->getType()->getClassName();
-        $schema->setType('enum');
-        $schema->setEnum([$className]);
+        $schema->type = 'enum';
+        $schema->enum = [$className];
     }
 
     public function supports(Model $model): bool

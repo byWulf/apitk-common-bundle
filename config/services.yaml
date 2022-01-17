@@ -1,8 +1,4 @@
 services:
-    Shopping\ApiTKCommonBundle\Util\ControllerReflector:
-        arguments:
-            $container: '@service_container'
-
     Shopping\ApiTKCommonBundle\Describer\EnumDescriber:
         public: false
         tags:
