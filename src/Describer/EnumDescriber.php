@@ -15,8 +15,14 @@ class EnumDescriber implements ModelDescriberInterface
     public function describe(Model $model, Schema $schema): void
     {
         $className = $model->getType()->getClassName();
+
+        if (is_string($className) && method_exists($className, 'toArray')) {
+            $schema->enum = array_values($className::toArray());
+        } else {
+            $schema->enum = [$className];
+        }
+
         $schema->type = 'enum';
-        $schema->enum = [$className];
     }
 
     public function supports(Model $model): bool
