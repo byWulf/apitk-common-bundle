@@ -7,36 +7,53 @@ on:
       - "master"
 
 jobs:
-  test:
+  run:
     runs-on: ubuntu-20.04
+    env:
+      extensions: intl,mbstring
     strategy:
+      fail-fast: false
       matrix:
-        php-version:
-          - "7.4"
-          - "8.0"
-
+        php: ['8.0', '8.1']
+        symfony: ['~6.0']
+        versions: ['prefer-stable', 'prefer-lowest']
+        include:
+          - description: 'Symfony 5.4 stable'
+            php: '8.0'
+            symfony: '^5.4'
+            versions: 'prefer-stable'
+          - description: 'Symfony 5.4 lowest'
+            php: '8.0'
+            symfony: '^5.4'
+            versions: 'prefer-lowest'
+    name: PHP ${{ matrix.php }} Symfony ${{ matrix.symfony }} ${{ matrix.versions }} ${{ matrix.description }}
     steps:
-      - name: "Checkout"
-        uses: "actions/checkout@v2"
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      - name: "Install PHP with extensions"
-        uses: "shivammathur/setup-php@v2"
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php-version }}
+          php-version: ${{ matrix.php }}
+          extensions: mbstring
 
-      - name: "Determine composer cache directory"
-        id: "determine-composer-cache-directory"
-        run: 'echo "::set-output name=directory::$(composer config cache-dir)"'
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-      - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v1"
+      - name: Cache composer dependencies
+        uses: actions/cache@v2
         with:
-          path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
-          key: "php-${{ matrix.php-version }}-composer-cache"
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
 
-      - name: "Install Composer dependencies"
-        run: "composer install"
+      - name: Install dependencies
+        run: composer require "symfony/symfony:${{ matrix.symfony }}" --no-update --no-interaction
+        if: matrix.symfony-versions
 
-      - name: "Run pre-commit tests"
-        run: "php vendor/bin/captainhook hook:pre-commit"
+      - name: Install dependencies
+        run: composer update --no-interaction --${{ matrix.versions }}
 
+      - name: Run pre-commit tests
+        run: php vendor/bin/captainhook hook:pre-commit

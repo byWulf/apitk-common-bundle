@@ -9,6 +9,7 @@ $finder = PhpCsFixer\Finder::create()
 return (new PhpCsFixer\Config())
     ->setRiskyAllowed(true)
     ->setRules([
+        '@PHP81Migration' => true,
         '@Symfony' => true,
         '@Symfony:risky' => false,
         'align_multiline_comment' => true,
@@ -18,6 +19,7 @@ return (new PhpCsFixer\Config())
         'combine_consecutive_issets' => true,
         'combine_consecutive_unsets' => true,
         'compact_nullable_typehint' => true,
+        'declare_strict_types' => true,
         'final_class' => false,
         'final_public_method_for_abstract_class' => false,
         'function_typehint_space' => true,
@@ -30,7 +32,7 @@ return (new PhpCsFixer\Config())
         'no_null_property_initialization' => true,
         'echo_tag_syntax' => ['format' => 'long'],
         'no_superfluous_elseif' => true,
-        'no_superfluous_phpdoc_tags' => false,
+        'no_superfluous_phpdoc_tags' => true,
         'no_unneeded_curly_braces' => true,
         'no_unneeded_final_method' => true,
         'no_unreachable_default_argument_value' => false,
@@ -46,7 +48,7 @@ return (new PhpCsFixer\Config())
         'php_unit_strict' => false,
         'php_unit_test_class_requires_covers' => false,
         'phpdoc_add_missing_param_annotation' => true,
-        'phpdoc_no_package' => false,
+        'phpdoc_no_package' => true,
         'phpdoc_order' => true,
         'phpdoc_trim_consecutive_blank_line_separation' => true,
         'phpdoc_var_annotation_correct_order' => true,
@@ -60,6 +62,7 @@ return (new PhpCsFixer\Config())
         'strict_comparison' => false,
         'strict_param' => false,
         'yoda_style' => false,
-        'class_attributes_separation' => false,
+        'class_attributes_separation' => true,
     ])
     ->setFinder($finder);
+

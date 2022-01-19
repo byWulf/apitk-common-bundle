@@ -6,17 +6,9 @@ namespace Shopping\ApiTKCommonBundle\ParamConverter;
 
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * Trait RequestParamAwareParamConverterTrait.
- *
- * @package Shopping\ApiTKCommonBundle\ParamConverter
- */
 trait RequestParamAwareParamConverterTrait
 {
-    /**
-     * @var Request
-     */
-    protected $request;
+    protected Request $request;
 
     protected function getRequestParamValue(string $defaultValue = null, string $defaultName = 'id'): ?string
     {

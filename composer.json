@@ -1,8 +1,8 @@
 {
     "name": "check24/apitk-common-bundle",
+    "description": "Contains classes, interfaces and traits that are shared between check24/apitk-* bundles",
     "license": "MIT",
     "type": "symfony-bundle",
-    "description": "Contains classes, interfaces and traits that are shared between check24/apitk-* bundles",
     "authors": [
         {
             "name": "Michael Wolf",
@@ -13,58 +13,54 @@
             "email": "alexdo@alexdo.de"
         }
     ],
+    "require": {
+        "php": "^8.0",
+        "nelmio/api-doc-bundle": "^v4.8",
+        "sensio/framework-extra-bundle": "^6.0",
+        "symfony/config": "^5.3 || ^6.0",
+        "symfony/dependency-injection": "^5.3 || ^6.0",
+        "symfony/framework-bundle": "^5.3 || ^6.0"
+    },
+    "require-dev": {
+        "captainhook/captainhook": "^5.10.6",
+        "doctrine/doctrine-bundle": ">=2.3 <3.0",
+        "doctrine/orm": "^2.6 || ^3.0",
+        "friendsofphp/php-cs-fixer": "^3.4.0",
+        "phpmd/phpmd": "^2.11.1",
+        "phpspec/prophecy-phpunit": "^2.0.1",
+        "phpstan/phpstan": "^1.3.3",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "roave/security-advisories": "dev-latest"
+    },
     "autoload": {
         "psr-4": {
-            "Shopping\\ApiTKCommonBundle\\": ""
-        },
-        "exclude-from-classmap": [
-            "/Tests/"
-        ]
+            "Shopping\\ApiTKCommonBundle\\": "src/"
+        }
     },
     "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        },
         "preferred-install": {
             "*": "dist"
         },
         "sort-packages": true
     },
-    "require": {
-        "php": "^7.4 || ^8.0",
-        "nelmio/api-doc-bundle": "^3.2",
-        "sensio/framework-extra-bundle": "^5.3 || ^6.0",
-        "symfony/config": ">= 5.3 <6.0",
-        "symfony/dependency-injection": ">= 5.3 <6.0",
-        "symfony/framework-bundle": ">= 5.3 <6.0"
-    },
-    "require-dev": {
-        "roave/security-advisories": "dev-latest",
-        "captainhook/captainhook": "^5.8",
-        "doctrine/doctrine-bundle": ">=2.3 <3.0",
-        "doctrine/orm": "^2.6",
-        "friendsofphp/php-cs-fixer": "^3.0",
-        "phpmd/phpmd": "^2.6",
-        "phpspec/prophecy-phpunit": "^2.0",
-        "phpstan/phpstan": "^0.12",
-        "phpstan/phpstan-deprecation-rules": "^0.12.6",
-        "phpunit/phpunit": "^9.3",
-        "symfony/phpunit-bridge": "^4.0"
-    },
     "scripts": {
         "post-install-cmd": [
             "\\SebastianFeldmann\\CaptainHook\\Composer\\Cmd::install"
         ],
-        "test:php-cs-fixer": "@php vendor/bin/php-cs-fixer fix --verbose --dry-run",
-        "test:phpstan": "@php vendor/bin/phpstan analyse -c phpstan.neon .",
-        "test:phpmd": "@php vendor/bin/phpmd ./ text ruleset.xml --exclude vendor",
-        "test:phpunit": "@php vendor/bin/phpunit --verbose",
+        "fix": [
+            "@fix:php-cs-fixer"
+        ],
+        "fix:php-cs-fixer": "@php vendor/bin/php-cs-fixer fix --verbose",
         "test": [
             "@test:php-cs-fixer",
             "@test:phpstan",
-            "@test:phpmd",
-            "@test:phpunit"
+            "@test:phpmd"
         ],
-        "fix:php-cs-fixer": "@php vendor/bin/php-cs-fixer fix --verbose",
-        "fix": [
-            "@fix:php-cs-fixer"
-        ]
+        "test:php-cs-fixer": "@php vendor/bin/php-cs-fixer fix --verbose --dry-run",
+        "test:phpmd": "@php vendor/bin/phpmd ./src text ruleset.xml --exclude vendor",
+        "test:phpstan": "@php vendor/bin/phpstan analyse -c phpstan.neon"
     }
 }
